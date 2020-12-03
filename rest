@@ -2,3 +2,12 @@ curl -u admin:8dEBZhhdRYdhe2V9JkhkNRwPH http://127.0.0.1:8095/instance-ips |  py
 for iip in iips:
     url = "http://127.0.0.1:8095/instance-ip/" + iip["uuid"]
     r = requests.delete(url , auth=("admin", "8dEBZhhdRYdhe2V9JkhkNRwPH"))'
+
+
+curl -u admin:c0ntrail123 http://127.0.0.1:8095/bgp-as-a-services |  python -c 'import sys, json, requests; obj=json.load(sys.stdin); bgpaass=obj["bgp-as-a-services"];
+for bgpaas in bgpaass:
+    url = "http://127.0.0.1:8095/bgp-as-a-service/" + bgpaas["uuid"]
+    r = requests.get(url , auth=("admin", "c0ntrail123"))
+    bgp_obj = r.json()
+    print("{} {}".format("bgpaas fqname: ", bgp_obj["bgp-as-a-service"]["fq_name"]))
+    print("{} {}".format("bgp_router list: ", bgp_obj["bgp-as-a-service"]["bgp_router_refs"]))'
